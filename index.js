@@ -1,10 +1,12 @@
 const ig = require('./instagram');
-require('dotenv').config();
+const utils = require('./utils');
 
 (async () => {
+  const resp = await utils.getUserPass();
+
   await ig.initialize();
 
-  await ig.login(process.env.USERNAME_IG, process.env.PASSWORD_IG);
+  await ig.login(resp.name, resp.password);
 
   await ig.likeTagsProcess(['barreiras', 'lem']);
 })();

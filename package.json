@@ -3,13 +3,17 @@
   "version": "1.0.0",
   "description": "instagram bot",
   "main": "index.js",
+  "bin": {
+    "main": "index.js"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rm -rf build && pkg . --out-path build",
+    "postbuild": "cp -R ./node_modules/puppeteer/.local-chromium build/chromium"
   },
   "author": "Jordhan Carvalho",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^8.0.0",
+    "inquirer": "^6.4.1",
     "puppeteer": "^1.18.1"
   }
 }

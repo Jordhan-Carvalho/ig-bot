@@ -1,4 +1,5 @@
 const puppeteer = require('puppeteer');
+const utils = require('./utils');
 
 const url = 'https://instagram.com';
 const tagUrl = tag => `https://www.instagram.com/explore/tags/${tag}/`;
@@ -9,6 +10,7 @@ const instagram = {
 
   initialize: async () => {
     instagram.browser = await puppeteer.launch({
+      executablePath: utils.getPath,
       headless: false,
     });
     instagram.page = await instagram.browser.newPage();
@@ -16,6 +18,7 @@ const instagram = {
 
   login: async (username, password) => {
     await instagram.page.goto(url, { waitUntil: 'networkidle2' });
+    await instagram.page.waitFor(1000);
     let loginButton = await instagram.page.$x(
       '//a[contains(text(), "Log in")]'
     );
